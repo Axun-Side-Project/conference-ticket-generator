@@ -10,5 +10,9 @@ export default {
 	/**
 	 * Client Function 
 	 */
+	setForm({ state, commit }, data ) {
+		commit("SET_FORM", data);
+		commit("GENERATE_TICKET")
+	},
 
 }
