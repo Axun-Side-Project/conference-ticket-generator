@@ -9,7 +9,7 @@
 				</section>
 				<section class="ticket-bottom">
 					<div class="avatar-container">
-						<img class="avatar-image" :src="avatar_image" alt="">
+						<img class="avatar-image" :src="ticket.avatar || avatar_image" alt="">
 					</div>
 					<section class="information-container">
 						<p class="name">{{ ticket.name }}</p>
@@ -21,7 +21,7 @@
 				</section>
 			</section>
 			<div class="ticket-right">
-				<p class="ticket-number">#01069</p>
+				<p class="ticket-number">#01609</p>
 			</div>
 		</section>
 	</section>
@@ -58,6 +58,7 @@ export default {
 
 <style lang="scss" scoped>
 section.ticket {
+	top: 3rem;
 	position: relative;
 	overflow: hidden;
 	section.ticker-content {

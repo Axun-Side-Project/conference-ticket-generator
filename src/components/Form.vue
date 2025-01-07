@@ -4,11 +4,22 @@
 		<!-- Avatar -->
 		<section class="avatar form-group">
 			<label class="form-label" for="avatar">Upload Avatar</label>
-			<input type="file" id="avatar">
+			<input 
+				type="file" 
+				id="avatar" 
+				accept="image/*" 
+				@change="handleFileChange" 
+			/>
 			<label class="drag-label" for="avatar">
 				<div class="drag-n-drop-select-file">
-					<img :src="upload_icon" alt="">
-					<p>Drag and drop or click to upload</p>
+					<img :src="preview || upload_icon" alt="">
+					<p v-if="!preview">Drag and drop or click to upload</p>
+					<div v-else class="button-area">
+						<button @click.prevent="handleRemoveImage">Remove image</button>
+						<label for="avatar">
+							<button>Change image</button>
+						</label>
+					</div>
 				</div>
 			</label>
 		</section>
@@ -46,10 +57,29 @@ export default {
 	data() {
 		return {
 			upload_icon: upload_icon,
-			formData: {},
+			preview: null,
+			formData: {
+				avatar: null,
+				name: "",
+				email: "",
+				github_username: "",
+			},
 		};
 	},
 	methods: {
+		handleFileChange(event) {
+			const file = event.target.files[0];
+			if (file && file.type.startsWith("image/")) {
+				this.formData.avatar = URL.createObjectURL(file);
+				this.preview = URL.createObjectURL(file);
+			} else {
+				alert("Please select a valid image file.");
+			}
+		},
+		handleRemoveImage() {
+			this.formData.avatar = null;
+			this.preview = null;
+		},
 		hanldeSubmitForm() {
 			this.$store.dispatch("setForm", this.formData);
 		},
@@ -73,6 +103,23 @@ form {
 			&:hover {
 				border: 2px solid #ffffff4e;
 			}
+			div.button-area {
+				display: flex;
+				column-gap: 1rem;
+				button {
+					color: white;
+					background: #ffffff22;
+					padding: 0.2rem 0.4rem;
+					outline: none;
+					border: none;
+					&:hover {
+						background: #ffffff44;
+					}
+				}
+			}
+		}
+		img {
+			width: 3vw;
 		}
 		div.drag-n-drop-select-file {
 			display: flex;
