@@ -86,6 +86,7 @@ section#app {
   position: relative;
   background: url("/assets/images/background-desktop.png");
   background-size: 100% 100%;
+  background-repeat: repeat;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
