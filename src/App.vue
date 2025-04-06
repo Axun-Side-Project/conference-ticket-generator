@@ -88,8 +88,10 @@ section#app {
   background-size: 100% 100%;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
   color: white;
   img.pattern {
+    width: 100%;
     position: absolute;
     z-index: 1;
   }
@@ -99,7 +101,6 @@ section#app {
   }
   img.lines_pattern {
     top: 0;
-    width: 100%;
     height: 100%;
   }
   img.circle_pattern {
